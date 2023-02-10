@@ -83,7 +83,7 @@
             this.addBtn.Location = new System.Drawing.Point(309, 324);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(75, 35);
-            this.addBtn.TabIndex = 3;
+            this.addBtn.TabIndex = 5;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -96,7 +96,7 @@
             this.changeBtn.Location = new System.Drawing.Point(309, 375);
             this.changeBtn.Name = "changeBtn";
             this.changeBtn.Size = new System.Drawing.Size(75, 35);
-            this.changeBtn.TabIndex = 3;
+            this.changeBtn.TabIndex = 6;
             this.changeBtn.Text = "Change";
             this.changeBtn.UseVisualStyleBackColor = false;
             this.changeBtn.Click += new System.EventHandler(this.changeBtn_Click);
@@ -108,7 +108,7 @@
             this.birthdatetime.Location = new System.Drawing.Point(138, 281);
             this.birthdatetime.Name = "birthdatetime";
             this.birthdatetime.Size = new System.Drawing.Size(216, 23);
-            this.birthdatetime.TabIndex = 0;
+            this.birthdatetime.TabIndex = 4;
             this.birthdatetime.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // numberTxb
@@ -117,7 +117,7 @@
             this.numberTxb.Mask = "+(994) 00-000-00-00";
             this.numberTxb.Name = "numberTxb";
             this.numberTxb.Size = new System.Drawing.Size(216, 26);
-            this.numberTxb.TabIndex = 2;
+            this.numberTxb.TabIndex = 3;
             this.numberTxb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numberTxb.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
             // 
@@ -126,7 +126,7 @@
             this.emailTxb.Location = new System.Drawing.Point(138, 161);
             this.emailTxb.Name = "emailTxb";
             this.emailTxb.Size = new System.Drawing.Size(216, 26);
-            this.emailTxb.TabIndex = 1;
+            this.emailTxb.TabIndex = 2;
             this.emailTxb.TextChanged += new System.EventHandler(this.emailTxb_TextChanged);
             // 
             // surnameTxb
@@ -142,7 +142,7 @@
             this.nameTxb.Location = new System.Drawing.Point(138, 55);
             this.nameTxb.Name = "nameTxb";
             this.nameTxb.Size = new System.Drawing.Size(216, 26);
-            this.nameTxb.TabIndex = 1;
+            this.nameTxb.TabIndex = 0;
             this.nameTxb.TextChanged += new System.EventHandler(this.nameTxb_TextChanged);
             // 
             // birthdateLbl
@@ -199,6 +199,7 @@
             this.humanslistBox.Name = "humanslistBox";
             this.humanslistBox.Size = new System.Drawing.Size(293, 270);
             this.humanslistBox.TabIndex = 1;
+            this.humanslistBox.SelectedIndexChanged += new System.EventHandler(this.humanslistBox_SelectedIndexChanged);
             this.humanslistBox.DoubleClick += new System.EventHandler(this.humanslistBox_DoubleClick);
             // 
             // headerLbl
@@ -219,7 +220,7 @@
             this.filenameTxb.Location = new System.Drawing.Point(591, 350);
             this.filenameTxb.Name = "filenameTxb";
             this.filenameTxb.Size = new System.Drawing.Size(181, 26);
-            this.filenameTxb.TabIndex = 3;
+            this.filenameTxb.TabIndex = 7;
             // 
             // filenameLbl
             // 
@@ -239,7 +240,7 @@
             this.loadBtn.Location = new System.Drawing.Point(479, 403);
             this.loadBtn.Name = "loadBtn";
             this.loadBtn.Size = new System.Drawing.Size(92, 35);
-            this.loadBtn.TabIndex = 5;
+            this.loadBtn.TabIndex = 8;
             this.loadBtn.Text = "Load";
             this.loadBtn.UseVisualStyleBackColor = false;
             this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
@@ -252,7 +253,7 @@
             this.saveBtn.Location = new System.Drawing.Point(591, 403);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(92, 35);
-            this.saveBtn.TabIndex = 5;
+            this.saveBtn.TabIndex = 9;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
@@ -265,7 +266,7 @@
             this.exitBtn.Location = new System.Drawing.Point(697, 403);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(92, 35);
-            this.exitBtn.TabIndex = 3;
+            this.exitBtn.TabIndex = 10;
             this.exitBtn.Text = "Exit";
             this.exitBtn.UseVisualStyleBackColor = false;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyNewForm
 {
@@ -35,6 +36,18 @@ namespace MyNewForm
 
             }
             return person;
+        }
+        public void WriteListBox(ListBox.ObjectCollection humans)
+        {
+            var serializer = new JsonSerializer();
+            using (var sw = new StreamWriter("humans.json"))
+            {
+                using (var jw = new JsonTextWriter(sw))
+                {
+                    jw.Formatting = Newtonsoft.Json.Formatting.Indented;
+                    serializer.Serialize(jw, humans);
+                }
+            }
         }
     }
 }

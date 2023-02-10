@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,22 +14,38 @@ namespace MyNewForm
 {
     public partial class Form1 : Form
     {
+        List<Person> humans = new List<Person>();       
+        Person user = new Person();
+        Person person = new Person();
+        List<Person> GetAllPersons()
+        {
+            List<Person> persons = new List<Person>();
+            var files = Directory.GetFiles(".");
+            foreach (var item in files)
+            {
+                if (item.EndsWith(".json"))
+                {
+                    var obj = JsonConvert.DeserializeObject<Person>(File.ReadAllText(item));
+                    persons.Add(obj);
+                }
+            }
+            return persons;
+        }
         public Form1()
         {
             InitializeComponent();
             this.BackColor = Color.FromArgb(124, 152, 133);
-            headerLbl.BackColor = Color.FromArgb(11,60,73);
-            changeBtn.BackColor = Color.FromArgb(11,60,73);
-            addBtn.BackColor = Color.FromArgb(11,60,73);
-            loadBtn.BackColor = Color.FromArgb(11,60,73);
-            saveBtn.BackColor = Color.FromArgb(11,60,73);
-            exitBtn.BackColor = Color.FromArgb(11,60,73);
+            headerLbl.BackColor = Color.FromArgb(11, 60, 73);
+            changeBtn.BackColor = Color.FromArgb(11, 60, 73);
+            addBtn.BackColor = Color.FromArgb(11, 60, 73);
+            loadBtn.BackColor = Color.FromArgb(11, 60, 73);
+            saveBtn.BackColor = Color.FromArgb(11, 60, 73);
+            exitBtn.BackColor = Color.FromArgb(11, 60, 73);
         }
-
-        Person person = new Person();
-        Person user = new Person();
+         
         FileHelper fileHelper = new FileHelper();
-        List<Person> humans = new List<Person> { };
+        
+
         private void nameTxb_TextChanged(object sender, EventArgs e)
         {
             person.Name = nameTxb.Text;
@@ -47,7 +64,7 @@ namespace MyNewForm
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-            person.Number = numberTxb.Text.ToString();
+            person.Number = numberTxb.Text;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -59,7 +76,7 @@ namespace MyNewForm
         {
             humanslistBox.Items.Add(person);
             humanslistBox.DisplayMember = nameof(Person.Name);
-            filenameTxb.Text = person.Filename+".json";
+            filenameTxb.Text = person.Filename + ".json";
             if (!humanslistBox.Items.Equals(person.Id))
             {
                 humans.Add(person);
@@ -74,6 +91,9 @@ namespace MyNewForm
         private void saveBtn_Click(object sender, EventArgs e)
         {
             fileHelper.Write(person);
+            //fileHelper.WriteListBox(humanslistBox.Items.ToString());
+            changeBtn.Location = new Point(309, 375);
+            addBtn.Location = new Point(309, 324);
             nameTxb.Text = "";
             surnameTxb.Text = "";
             emailTxb.Text = "";
@@ -87,8 +107,14 @@ namespace MyNewForm
         {
             try
             {
-                var path=Directory.GetCurrentDirectory()+"\\"+filenameTxb.Text;
-                if (File.Exists(path) || File.Exists(path+".json"))
+                if (filenameTxb.Text == "")
+                {
+                    var persons = GetAllPersons();
+                    humanslistBox.Items.AddRange(persons.ToArray());
+                    humanslistBox.DisplayMember = nameof(Person.Name);
+                }
+                var path = Directory.GetCurrentDirectory() + "\\" + filenameTxb.Text;
+                if (File.Exists(path) || File.Exists(path + ".json"))
                 {
                     changeBtn.Location = new Point(309, 324);
                     addBtn.Location = new Point(309, 375);
@@ -108,7 +134,7 @@ namespace MyNewForm
                 nameTxb.Text = user.Name;
                 surnameTxb.Text = user.Surname;
                 emailTxb.Text = user.Email;
-                numberTxb.Text = user.Number.ToString();
+                numberTxb.Text = user.Number;
                 birthdatetime.Text = user.Birthdate.ToString();
             }
             catch
@@ -119,13 +145,13 @@ namespace MyNewForm
 
         private void changeBtn_Click(object sender, EventArgs e)
         {
-            filenameTxb.Text = user.Filename+".json";
+            filenameTxb.Text = user.Filename + ".json";
             if (nameTxb.Text != user.Name)
             {
                 user.Name = nameTxb.Text;
             }
             if (person.Name != user.Name)
-            {               
+            {
                 person.Filename = user.Filename;
             }
             else
@@ -158,6 +184,12 @@ namespace MyNewForm
         }
 
         private void humanslistBox_DoubleClick(object sender, EventArgs e)
+        {
+            var human = humanslistBox.SelectedItem as Person;
+            filenameTxb.Text = human.Filename;
+        }
+
+        private void humanslistBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var human = humanslistBox.SelectedItem as Person;
             filenameTxb.Text = human.Filename;
