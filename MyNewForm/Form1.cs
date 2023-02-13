@@ -14,7 +14,7 @@ namespace MyNewForm
 {
     public partial class Form1 : Form
     {
-        List<Person> humans = new List<Person>();       
+        List<Person> humans = new List<Person>();
         Person user = new Person();
         Person person = new Person();
         List<Person> GetAllPersons()
@@ -42,44 +42,25 @@ namespace MyNewForm
             saveBtn.BackColor = Color.FromArgb(11, 60, 73);
             exitBtn.BackColor = Color.FromArgb(11, 60, 73);
         }
-         
+
         FileHelper fileHelper = new FileHelper();
-        
 
-        private void nameTxb_TextChanged(object sender, EventArgs e)
-        {
-            person.Name = nameTxb.Text;
-            person.Filename = person.Name;
-        }
 
-        private void surnameTxb_TextChanged(object sender, EventArgs e)
-        {
-            person.Surname = surnameTxb.Text;
-        }
-
-        private void emailTxb_TextChanged(object sender, EventArgs e)
-        {
-            person.Email = emailTxb.Text;
-        }
-
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            person.Number = numberTxb.Text;
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            person.Birthdate = birthdatetime.Value;
-        }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            humanslistBox.Items.Add(person);
+            person = new Person();
+            person.Name = nameTxb.Text;
+            person.Filename = person.Name;
+            person.Surname = surnameTxb.Text;
+            person.Email = emailTxb.Text;
+            person.Number = numberTxb.Text;
+            person.Birthdate = birthdatetime.Value;
             humanslistBox.DisplayMember = nameof(Person.Name);
             filenameTxb.Text = person.Filename + ".json";
             if (!humanslistBox.Items.Equals(person.Id))
             {
-                humans.Add(person);
+                humanslistBox.Items.Add(person);
             }
 
             if (!filenameTxb.Text.Contains(".json"))
@@ -110,6 +91,7 @@ namespace MyNewForm
                 if (filenameTxb.Text == "")
                 {
                     var persons = GetAllPersons();
+                    humanslistBox.Items.Clear();
                     humanslistBox.Items.AddRange(persons.ToArray());
                     humanslistBox.DisplayMember = nameof(Person.Name);
                 }
@@ -126,16 +108,13 @@ namespace MyNewForm
                 if (File.Exists(filenameTxb.Text))
                 {
                     user = fileHelper.Read(filenameTxb.Text);
+                    nameTxb.Text = user.Name;
+                    surnameTxb.Text = user.Surname;
+                    emailTxb.Text = user.Email;
+                    numberTxb.Text = user.Number;
+                    birthdatetime.Text = user.Birthdate.ToString();
                 }
-                else
-                {
 
-                }
-                nameTxb.Text = user.Name;
-                surnameTxb.Text = user.Surname;
-                emailTxb.Text = user.Email;
-                numberTxb.Text = user.Number;
-                birthdatetime.Text = user.Birthdate.ToString();
             }
             catch
             {
@@ -193,6 +172,17 @@ namespace MyNewForm
         {
             var human = humanslistBox.SelectedItem as Person;
             filenameTxb.Text = human.Filename;
+
+            nameTxb.Text = human.Name;
+            surnameTxb.Text = human.Surname;
+            emailTxb.Text = human.Email;
+            numberTxb.Text = human.Number;
+            birthdatetime.Text = human.Birthdate.ToString();
+        }
+
+        private void nameTxb_TextChanged(object sender, EventArgs e)
+        {
+            person.Filename = person.Name;
         }
     }
 }

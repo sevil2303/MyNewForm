@@ -109,7 +109,6 @@
             this.birthdatetime.Name = "birthdatetime";
             this.birthdatetime.Size = new System.Drawing.Size(216, 23);
             this.birthdatetime.TabIndex = 4;
-            this.birthdatetime.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // numberTxb
             // 
@@ -119,7 +118,6 @@
             this.numberTxb.Size = new System.Drawing.Size(216, 26);
             this.numberTxb.TabIndex = 3;
             this.numberTxb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numberTxb.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
             // 
             // emailTxb
             // 
@@ -127,7 +125,6 @@
             this.emailTxb.Name = "emailTxb";
             this.emailTxb.Size = new System.Drawing.Size(216, 26);
             this.emailTxb.TabIndex = 2;
-            this.emailTxb.TextChanged += new System.EventHandler(this.emailTxb_TextChanged);
             // 
             // surnameTxb
             // 
@@ -135,7 +132,6 @@
             this.surnameTxb.Name = "surnameTxb";
             this.surnameTxb.Size = new System.Drawing.Size(216, 26);
             this.surnameTxb.TabIndex = 1;
-            this.surnameTxb.TextChanged += new System.EventHandler(this.surnameTxb_TextChanged);
             // 
             // nameTxb
             // 
